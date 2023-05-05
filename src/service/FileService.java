@@ -73,9 +73,13 @@ public class FileService {
 				if (linha.contains(monthName) && linha.contains(String.valueOf(year))) {
 					String[] averageSplit = linha.split(",");
 					
-					if (Double.parseDouble(averageSplit[3]) > Double.valueOf(valueExpected)) {
+					if (checkValueExpected) {
+						if (Double.parseDouble(averageSplit[3]) > Double.valueOf(valueExpected)) {
+							text.append(linha + "\r\n");
+						}		
+					} else {
 						text.append(linha + "\r\n");
-					}			
+					}
 				}
 
 				linha = buffer.readLine();
