@@ -23,7 +23,7 @@ public class SteamController implements ISteamController {
 	public void search(int month, int year, int valueExpected) {
 		try {
 			String monthName = this.getMonthName(month);
-			String data = this.service.readData(this.steamFile, monthName, year, valueExpected);
+			String data = this.service.readData(this.steamFile, monthName, year, valueExpected, true);
 			
 			if (data.length() <= 0) {
 				JOptionPane.showMessageDialog(null, "Nenhum registro encontrado");
@@ -38,8 +38,31 @@ public class SteamController implements ISteamController {
 
 	@Override
 	public void saveSearch(int month, int year, String fileName) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String monthName = this.getMonthName(month);
+			
+			String data = this.service.readData(this.steamFile, monthName, year, 0, false);
+			
+			if (data.length() <= 0) {
+				JOptionPane.showMessageDialog(null, "Nenhum registro encontrado");
+			} else {
+				String[] dataSplited = data.split("\r\n");
+				
+				StringBuffer buffer = new StringBuffer();
+				
+				for (String dt : dataSplited) {
+					String[] dtSplited = dt.split(",");
+					
+					buffer.append(dtSplited[0] + "," + dtSplited[3] + "\r\n");
+				}
+				
+				this.service.run(fileName, buffer.toString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	private String getMonthName(int month) {

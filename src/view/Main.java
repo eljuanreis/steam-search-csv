@@ -27,6 +27,23 @@ public class Main {
 				controller.search(monthYear[0],
 						monthYear[1], 
 				valueExpected);
+			break;
+			case 2:
+				int[] monthYear2 = showMonthYearSelect();
+				
+				String filePath = JOptionPane.showInputDialog("Qual o caminho do arquivo? (ex: C:/temp)");
+				String fileName = JOptionPane.showInputDialog("Qual o nome do arquivo? (ex: teste)");
+				
+				final String fileAllName = String.format("%s/%s.csv", filePath, fileName);
+				controller.saveSearch(monthYear2[0], monthYear2[1], fileAllName);
+			break;
+			case 9:
+				JOptionPane.showMessageDialog(null, "Ok! Até a próxima");
+		
+			break;
+			default:
+				JOptionPane.showMessageDialog(null, "Opção inválida");
+				
 			}
 		
 		} while (option != 9);

@@ -14,7 +14,7 @@ public class FileService {
 	 String fileFormat = "csv";
 	
 	public  void run(String fileName, String data) throws Exception {
-		File file = new File(makeFilePath(fileName));
+		File file = new File(fileName);
 		
 		if (file.exists() && file.isFile()) {
 			appendFile(file, data);
@@ -56,7 +56,7 @@ public class FileService {
 		print.close();
 	}
 	
-	public String readData(String fileName, String monthName, int year, int valueExpected) throws IOException {
+	public String readData(String fileName, String monthName, int year, int valueExpected, boolean checkValueExpected) throws IOException {
 		File file = new File(makeFilePath(fileName));
 				
 		if (file.exists() && file.isFile()) {
